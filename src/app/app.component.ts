@@ -37,9 +37,7 @@ export class AppComponent implements OnInit {
     if (this.productForm.invalid) {
       return false;
     }
-    
-    console.log(this.name.dirty, this.name.errors);
-    console.log('aca vamos...', this.productForm.valid)
+ 
     this.service.agregarProducto(this.productForm.value as Product);
     this.limpiarFormulario();
   }
