@@ -8,12 +8,8 @@ export class ProductServiceService {
   productList: BehaviorSubject<Product[]>;
   listaP: Product[] = [];
  
-  constructor() { }
-
-
-  listaProductos() :Observable<Product[]>{
-
-    this.listaP = [
+  constructor() { 
+     this.listaP = [
       {
         name: "Zapatos",
         description: "Zapatos Nike",
@@ -33,11 +29,24 @@ export class ProductServiceService {
         price: 500000
       }
     ];
+
     this.productList = new BehaviorSubject(this.listaP);
+  }
+
+
+  listaProductos() :Observable<Product[]>{
+
+   
+    
     return  this.productList.asObservable().pipe(
       map(e => e as Product[]
       )
       );
+  }
+
+  agregarProducto(producto: Product) {
+    console.log(producto)
+     this.productList.next([...this.productList.value, producto]);
   }
 
 }

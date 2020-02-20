@@ -1,86 +1,88 @@
+<div class="container is-fluid">
 <div class="columns is-variable is-1-mobile is-0-tablet is-3-desktop is-8-widescreen is-2-fullhd">
 	<div class="column">
 		<form [formGroup]="productForm" (ngSubmit)="agregarProducto()">
 			<div class="field">
 				<label class="label">Nombre</label>
 				<div class="control">
-					<input class="input" type="text" placeholder="Text input" formControlName="name"
-            [ngClass]="{'is-danger': name.errors}"
-          >
+					<input class="input" type="text" placeholder="Nombre del producto" formControlName="name"
+            [ngClass]="{'is-danger': (name.errors && submited), 'is-primary': !name.errors}">
 
-         <div *ngIf="name.errors && (name.dirty || name.touched)">
-           <p class="help is-danger" *ngIf="name.errors && name.errors.required">Ingrese un nombre válido</p>
-                      <p class="help is-danger" *ngIf="name.errors && (name.errors.minlength ||name.errors.minlength) ">El nombre de tener minímo 3 caracteres y maxímo 120 carateres</p>
-         </div>
-    </div>
+					<div *ngIf="name.errors && submited">
+						<p class="help is-danger" *ngIf="name.errors && name.errors.required">Ingrese un nombre válido
+						</p>
+						<p class="help is-danger"
+							*ngIf="name.errors && (name.errors.minlength ||name.errors.maxlength) ">El nombre de tener
+							minímo 3 caracteres y maxímo 120 carateres</p>
+					</div>
 				</div>
+			</div>
 
-				<div class="field">
-					<label class="label">Descripción</label>
-					<div class="control has-icons-left has-icons-right">
-						<textarea class="textarea" placeholder="Textarea" formControlName="description"></textarea>
-						<span class="icon is-small is-left">
+			<div class="field">
+				<label class="label">Descripción</label>
+				<div class="control has-icons-left has-icons-right">
+					<textarea class="textarea" placeholder="Descripción del producto" formControlName="description" [ngClass]="{'is-danger': (description.errors && submited), 'is-primary': !description.errors}"></textarea>
+					<span class="icon is-small is-left">
           <i class="fas fa-user"></i>
     </span>
-						<span class="icon is-small is-right">
+					<span class="icon is-small is-right">
       <i class="fas fa-check"></i>
     </span>
-					</div>
-					<p class="help is-success">This username is available</p>
 				</div>
+				<div *ngIf="description.errors && submited">
+					<p class="help is-danger"
+						*ngIf="description.errors && (description.errors.required || description.errors.minlength) ">Por
+						favor agrega una descripción</p>
+				</div>
+			</div>
 
-				<div class="field">
-					<label class="label">Año</label>
-					<div class="control has-icons-left has-icons-right">
-						<input class="input is-danger" type="email" placeholder="Email input" value="hello@" formControlName="year">
-						<span class="icon is-small is-left">
+			<div class="field">
+				<label class="label">Año</label>
+				<div class="control has-icons-left has-icons-right">
+					<input class="input"
+            [ngClass]="{'is-danger': (year.errors && submited), 'is-primary': !year.errors}"
+             type="number" placeholder="Año de creación del producto" value="0" formControlName="year">
+					<span class="icon is-small is-left">
       <i class="fas fa-envelope"></i>
     </span>
-						<span class="icon is-small is-right">
+					<span class="icon is-small is-right">
       <i class="fas fa-exclamation-triangle"></i>
     </span>
-					</div>
-					<p class="help is-danger">This email is invalid</p>
 				</div>
+				<div *ngIf="year.errors && submited">
+					<p class="help is-danger">Fecha invalida</p>
+				</div>
+			</div>
+
+			<div class="field">
+				<label class="label">Precio</label>
+				<div class="control">
+					<input class="input" type="email" placeholder="Precio del producto"
+          [ngClass]="{'is-danger': submited && price.errors, 'is-primary' : !price.errors}" formControlName="price">
+				</div>
+				</div>
+
 
 				<div class="field">
-					<label class="label">Precio</label>
 					<div class="control">
-						<input class="input is-danger" type="email" placeholder="Email input" value="hello@" formControlName="price">
+						<label class="checkbox">
+      <input type="checkbox" formControlName="termsCondition" [ngClass]="{'is-danger': submited && termsCondition.errors}">
+      Aceptar  los<a href="#"> terminos y condiciones</a>
+ 
+    </label>
+					</div>
+					<div *ngIf="termsCondition.errors && termsCondition.required">
+						Hola
+					</div>
 				</div>
+				<div class="field is-grouped">
+					<div class="control">
+						<button [disabled]="submited && productForm.invalid" class="button is-link" type="submit">Guardar</button>
 					</div>
-
-
-					<div class="field">
-						<div class="control">
-							<label class="checkbox">
-      <input type="checkbox">
-      I agree to the <a href="#">terms and conditions</a>
-    </label>
-						</div>
+					<div class="control">
+						<button class="button is-link is-light">Cancelar</button>
 					</div>
-
-					<div class="field">
-						<div class="control">
-							<label class="radio">
-      <input type="radio" name="question">
-      Yes
-    </label>
-							<label class="radio">
-      <input type="radio" name="question">
-      No
-    </label>
-						</div>
-					</div>
-
-					<div class="field is-grouped">
-						<div class="control">
-							<button class="button is-link" type="submit">Submit</button>
-						</div>
-						<div class="control">
-							<button class="button is-link is-light">Cancel</button>
-						</div>
-					</div>
+				</div>
 		</form>
 	</div>
 	<div class="column">
@@ -106,4 +108,5 @@
 		</table>
 	</div>
 
+</div>
 </div>
